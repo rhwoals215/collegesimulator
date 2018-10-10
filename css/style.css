@@ -8,6 +8,7 @@
     background-color: #111; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 40px; /* Place content 60px from the top */
+    width: 230px;
 }
 
 /* The navigation menu links */
@@ -23,14 +24,18 @@
     color: #f1f1f1;
 }
 
-#actions:hover {
-  color: #818181;
+#actions{
+  color: #f1f1f1;
+}
+
+#actions:hover{
+  color: #f1f1f1;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
     padding: 20px;
-    margin-left: 150px;
+    margin-left: 250px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
