@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>College Simulator: Main menu</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="myScript.js"></script>
+  </head>
+  <body>
+    <div id="mySidenav" class="sidenav">
+      <a id="actions">Actions</a>
+      <a href="continue.html">Next</a>
+      <a href="new.html">Start New</a>
+      <a href="about.html">About</a>
+    </div>
+    <div id="main">
+      <h1>Randomize character properties</h1>
+      <div id="stat_box">
+        <div class="stat" id="strength">
+          Strength: <script>strength</script>
+        </div>
+        <div class="stat" id="intelligence">
+          Intelligence: <script>intelligence</script>
+        </div>
+        <div class="stat" id="luck">
+          Luck: <script>luck</script>
+        </div>
+        <div class="stat" id="attractiveness">
+          Attractiveness: <script>attractiveness</script>
+        </div>
+        <div class="stat" id="laziness">
+          Laziness: <script>laziness</script>
+        </div>
+        <div class="stat" id="happiness">
+          Happiness: <script>happiness</script>
+        </div>
+        <button type="button" name="roll dice" href="newroll()"></button>
+      </div>
+    </div>
+  </body>
+</html>
