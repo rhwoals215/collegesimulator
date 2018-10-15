@@ -2,36 +2,91 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-function newroll(user) {
-  var total=30;
-  user.strength=getRandomInt(10)
-  user.intelligence=getRandomInt(10)
-  user.luck=getRandomInt(10)
-  user.laziness=getRandomInt(10)
-  user.happiness=100-getRandomInt(50)
-  user.friends=getRandomInt(10)
+function newroll() {
+  var person=outputStorage();
+  let total=30;
+  person.strength=getRandomInt(10);
+  total-=person.strength;
+  person.intelligence=getRandomInt(10);
+  total-=person.intelligence;
+  person.attractiveness=getRandomInt(10);
+  total-=person.attractiveness;
+  person.luck=total;
+  person.laziness=getRandomInt(10);
+  person.friends=getRandomInt(10);
+  inputStorage(person);
 }
 
-function user() {
-  this.strength=0;
-  this.intelligence=0;
-  this.luck=0;
-  this.laziness=0;
-  this.happiness=0;
-  this.hunger=0;
-  this.loan=0;
-  this.friends=3;
-  this.health=100;
-  this.location=0;
-  this.currentcarttotal=0;
-  this.date=0;
-  this.time=8;
-  this.fatigue=0;
+var user={
+  strength:0,
+  intelligence:0,
+  luck:0,
+  laziness:0,
+  happiness:100,
+  hunger:0,
+  loan:0,
+  friends:3,
+  health:100,
+  location:0,
+  currentcarttotal:0,
+  date:0,
+  time:8,
+  fatigue:0,
+  attractiveness:0
 }
 
-function startnew() {
-  new user;
+function startNew() {
+  var person = user;
+  inputStorage(person);
 }
+
+function statWrite() {
+  var person=outputStorage();
+  document.write("Strength:"+person.strength);
+  document.write("Intelligence:"+person.intelligence);
+  document.write("Attractiveness:"+person.attractiveness);
+  document.write("luck:"+person.luck);
+  document.write("Number of friends:"+person.friends);
+}
+function inputStorage(person){
+  window.localStorage.setItem('person1', JSON.stringify(person));
+
+}
+function outputStorage(){
+  return JSON.parse(window.localStorage.getItem('person1'));
+}
+
+/*function inputStorage(person){
+  localStorage.str=person.strength;
+  localStorage.int=person.intelligence;
+  localStorage.laz=person.laziness;
+  localStorage.hap=person.happiness;
+  localStorage.hgr=person.hunger;
+  localStorage.loan=person.loan;
+  localStorage.frnd=person.friends;
+  localStorage.hp=person.health;
+  localStorage.lctn=person.location;
+  localStorage.cct=person.currentcarttotal;
+  localStorage.date=person.date;
+  localStorage.ftg=person.fatigue;
+  localStorage.atv=person.attractiveness;
+}
+function outputStorage(person){
+  person.strength=parseInt(window.localStorage.getItem('str'));
+  person.intelligence=localStorage.int;
+  person.laziness=localStorage.laz;
+  person.happiness=localStorage.hap;
+  person.hunger=localStorage.hgr;
+  person.loan=localStorage.loan;
+  person.friends=localStorage.frnd;
+  person.health=localStorage.hp;
+  person.location=localStorage.lctn;
+  person.currentcarttotal=localStorage.cct;
+  person.date=localStorage.date;
+  person.fatigue=localStorage.ftg;
+  person.attractiveness=localStorage.atv;
+}
+*/
 function displayTime(user) {
   var ampm="AM";
   var hour=math.floor(user.time);
@@ -43,63 +98,68 @@ function displayTime(user) {
     ampm="PM";
     time-=12;
   }
-  console.log(hour+":"_+minute+ampm);
+  console.log(hour+":"+minute+ampm);
+}
+
+function refreshTime(person) {
+  if (person.time>=24){
+    person.time-=24;
+    person.date+=1;
   }
 }
 
-function refreshTime(user) {
-  if (user.time>=24){
-    user.time-=24;
-    user.date+=1;
-  }
-}
-
-function homesleep(user) {
-  if (user.fatigue>0){
-    if (user.time<20 && user.time>=8){
-      console.log(displayTime(user.time));
+function homesleep(person) {
+  if (person.fatigue>0){
+    if (person.time<20 && person.time>=8){
+      console.log(displayTime(person.time));
       console.log("You took a 2 hour nap.");
-      if (user.fatigue<=3){
-        console.log("Fatigue: "+user.fatigue+" -> 0");
-        user.fatigue=0;
+      if (person.fatigue<=3){
+        console.log("Fatigue: "+person.fatigue+" -> 0");
+        person.fatigue=0;
       }
       else {
-        console.log("Fatigue: "+user.fatigue+" -> "+user.fatigue-3);
-        user.fatigue-=3;
+        console.log("Fatigue: "+person.fatigue+" -> "+person.fatigue-3);
+        person.fatigue-=3;
       }
-      console.log("laziness: "+user.laziness+" -> "+user.laziness+1);
-      user.laziness++;
+      console.log("laziness: "+person.laziness+" -> "+person.laziness+1);
+      person.laziness++;
     }
-    else if (user.time<2 && user.time>=20) {
+    else if (person.time<2 && person.time>=20) {
       console.log("You had a great sleep!");
-      console.log("Fatigue: "+user.fatigue+" -> 0");
-      user.fatigue=0;
-      user.time=8;
+      console.log("Fatigue: "+person.fatigue+" -> 0");
+      person.fatigue=0;
+      person.time=8;
     }
-    else if (user.time<8 && user.time>=2){
-      if (user.fatigue<=2){
+    else if (person.time<8 && person.time>=2){
+      if (person.fatigue<=2){
         console.log("You slept for a bit.");
-        user.fatigue=0;
-        console.log("Fatigue: "+user.fatigue+" -> 0");
+        person.fatigue=0;
+        console.log("Fatigue: "+person.fatigue+" -> 0");
       }
       else {
         console.log("You slept for a bit, but you still feel tired.");
-        console.log("Fatigue: "+user.fatigue+" -> "+user.fatigue-2);
-        user.fatigue-=2;
+        console.log("Fatigue: "+person.fatigue+" -> "+person.fatigue-2);
+        person.fatigue-=2;
       }
     }
     else{
       console.log("You couldn't sleep.");
     }
     refreshTime();
-    console.log("Now it is "+displayTime(user.time));
+    console.log("Now it is "+displayTime(person.time));
   }
   else{
     console.log("You are not tired");
   }
 }
 
-function homeeat() {
+function fridge() {
+  person.vegi=0;
+  person.meat=0;
+  person.readytoeat=0;
+}
+
+function homeeat(person) {
 
 }
 
