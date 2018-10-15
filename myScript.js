@@ -45,10 +45,12 @@ function statWrite() {
   document.write("Strength:"+person.strength+"</br>"+"Intelligence:"+person.intelligence+"</br>"+"Attractiveness:"+person.attractiveness);
   document.write("</br>"+"luck:"+person.luck+"</br>"+"Number of friends:"+person.friends);
 }
+
 function inputStorage(person){
   window.localStorage.setItem('person1', JSON.stringify(person));
 
 }
+
 function outputStorage(){
   return JSON.parse(window.localStorage.getItem('person1'));
 }
@@ -79,7 +81,7 @@ function refreshTime() {
 
 function homesleep() {
   let person=outputStorage();
-  document.getElementById("action_console").innerHTML =("</br>It was "+displayTime());
+  document.getElementById("action_console").innerHTML =("It was "+displayTime());
   if (person.fatigue>0){
     if (person.time<20 && person.time>=8){
       document.getElementById("action_console").innerHTML +=("</br>You took a 2 hour nap.");
@@ -109,9 +111,10 @@ function homesleep() {
       }
       else {
         document.getElementById("action_console").innerHTML +=("</br>You slept for a bit, but you still feel tired.");
-        document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> "+person.fatigue-2);
+        document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue-2));
         person.fatigue-=2;
       }
+      person.time=8;
     }
     else{
       document.getElementById("action_console").innerHTML +=("</br>You couldn't sleep.");
@@ -131,7 +134,7 @@ function fridge() {
   person.readytoeat=0;
 }
 
-function homeeat(person) {
+function homeeat() {
 
 }
 
@@ -141,8 +144,16 @@ function homestudy() {
 
 function homeworkout() {
   let person=outputStorage();
+  document.getElementById("action_console").innerHTML =("It was "+displayTime()+".");
+  document.getElementById("action_console").innerHTML +=("</br>You worked out very hard!");
   person.fatigue++;
+  person.time++;
+  person.strength++;
   inputStorage(person);
+  refreshTime();
+  document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
+  document.getElementById("action_console").innerHTML +=("</br>Strength: "+person.strength+" -> "+(person.strength+1));
+  document.getElementById("action_console").innerHTML +=("</br>Now it is "+displayTime()+".");
 }
 
 function checkout() {
