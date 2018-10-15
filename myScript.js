@@ -42,11 +42,8 @@ function startNew() {
 
 function statWrite() {
   var person=outputStorage();
-  document.write("Strength:"+person.strength);
-  document.write("Intelligence:"+person.intelligence);
-  document.write("Attractiveness:"+person.attractiveness);
-  document.write("luck:"+person.luck);
-  document.write("Number of friends:"+person.friends);
+  document.write("Strength:"+person.strength+"</br>"+"Intelligence:"+person.intelligence+"</br>"+"Attractiveness:"+person.attractiveness);
+  document.write("</br>"+"luck:"+person.luck+"</br>"+"Number of friends:"+person.friends);
 }
 function inputStorage(person){
   window.localStorage.setItem('person1', JSON.stringify(person));
