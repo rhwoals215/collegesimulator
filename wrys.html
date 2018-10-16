@@ -9,15 +9,20 @@
   </head>
   <body>
     <div id="mySidenav" class="sidenav">
+      <a id=clock><script>reloadTime();</script></a>
       <a id="actions">Actions</a>
       <a onclick="checkout()">Check out</a>
       <a onclick="stealwrys()">Steal</a>
       <a onclick="applywrys()">Apply for a job</a>
       <a href="street1.html">Leave</a>
+      <a href="index.html" id="main_menu_button">Main Menu</a>
     </div>
     <div id="main">
       <h1>Welcome to Wry's!</h1>
       <div id="action_console"></div>
+      <script>
+        writeTime();
+      </script>
     </div>
   </body>
 </html>
