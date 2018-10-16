@@ -83,6 +83,44 @@ function reloadTime() {
   document.getElementById("clock").innerHTML=displayTime();
 }
 
+function displayDate() {
+  let person=outputStorage();
+  let day = "";
+  let countDay=0;
+  let week=0;
+  if (person.date%7==0){
+    day="Monday";
+  }
+  else if (person.date%7==1){
+    day="Tuesday";
+  }
+  else if (person.date%7==2){
+    day="Wednesday";
+  }
+  else if (person.date%7==3){
+    day="Thursday";
+  }
+  else if (person.date%7==4){
+    day="Friday";
+  }
+  else if (person.date%7==5){
+    day="Saturday";
+  }
+  else if (person.date%7==6){
+    day="Sunday";
+  }
+  for(i=0;i<person.date;i++){
+    if (i%7==6){
+      week++;
+    }
+  }
+  return (week+" "+day);
+}
+
+function reloadDate() {
+  document.getElementById("date").innerHTML=displayDate();
+}
+
 function homesleep() {
   let person=outputStorage();
   if (person.fatigue>0){
@@ -129,6 +167,7 @@ function homesleep() {
     document.getElementById("action_console").innerHTML=("</br>You are not tired");
   }
   reloadTime();
+  reloadDate();
 }
 
 function fridge() {
@@ -156,6 +195,7 @@ function homeworkout() {
   document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
   document.getElementById("action_console").innerHTML +=("</br>Strength: "+person.strength+" -> "+(person.strength+1));
   reloadTime();
+  reloadDate();
 }
 
 function checkout() {
