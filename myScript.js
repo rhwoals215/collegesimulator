@@ -86,7 +86,6 @@ function reloadTime() {
 function displayDate() {
   let person=outputStorage();
   let day = "";
-  let countDay=0;
   let week=0;
   if (person.date%7==0){
     day="Monday";
@@ -114,7 +113,7 @@ function displayDate() {
       week++;
     }
   }
-  return (week+" "+day);
+  return ("Week "+week+", "+day);
 }
 
 function reloadDate() {
@@ -124,7 +123,7 @@ function reloadDate() {
 function homesleep() {
   let person=outputStorage();
   if (person.fatigue>0){
-    if (person.time<20 && person.time>=8){
+    if (person.time<21 && person.time>=8){
       document.getElementById("action_console").innerHTML =("</br>You took a 2 hour nap.");
       person.time+=2;
       if (person.fatigue<=3){
@@ -138,10 +137,11 @@ function homesleep() {
       document.getElementById("action_console").innerHTML +=("</br>laziness: "+person.laziness+" -> "+(person.laziness+1));
       person.laziness++;
     }
-    else if (person.time<2 || person.time>=20) {
+    else if (person.time<2 || person.time>=21) {
       document.getElementById("action_console").innerHTML =("</br>You had a great sleep!");
       document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> 0");
       person.fatigue=0;
+      if (person.time>=21){person.date+=1;}
       person.time=8;
     }
     else if (person.time<8 && person.time>=2){
@@ -160,8 +160,8 @@ function homesleep() {
     else{
       document.getElementById("action_console").innerHTML=("</br>You couldn't sleep.");
     }
-    inputStorage(person);
     calculateTime();
+    inputStorage(person);
   }
   else{
     document.getElementById("action_console").innerHTML=("</br>You are not tired");

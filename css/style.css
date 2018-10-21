@@ -27,8 +27,21 @@ a:hover{
     color: #f1f1f1;
 }
 
+#date{
+  color: #f1f1f1;
+  font-size: 15px;
+  text-align: center;
+}
+
+#date:hover{
+  color: #f1f1f1;
+  cursor: default;
+}
+
 #clock{
   color: #f1f1f1;
+  font-size: 15px;
+  text-align: center;
 }
 
 #clock:hover{
@@ -55,6 +68,11 @@ a:hover{
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+}
+
+#status{
+  position: absolute;
+  bottom: 120px;
 }
 
 #main_menu_button {
