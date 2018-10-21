@@ -70,7 +70,7 @@ function displayTime() {
   return (hour+":"+minute+ampm);
 }
 
-function calculateTime() {
+function refreshTime() {
   let person=outputStorage();
   if (person.time>=24){
     person.time-=24;
@@ -79,6 +79,7 @@ function calculateTime() {
   inputStorage(person);
 }
 
+<<<<<<< HEAD
 function reloadTime() {
   document.getElementById("clock").innerHTML=displayTime();
 }
@@ -121,11 +122,14 @@ function reloadDate() {
   document.getElementById("date").innerHTML=displayDate();
 }
 
+=======
+>>>>>>> parent of 3edd9e0... show clock, fixed reloadTime
 function homesleep() {
   let person=outputStorage();
+  document.getElementById("action_console").innerHTML =("It was "+displayTime());
   if (person.fatigue>0){
     if (person.time<20 && person.time>=8){
-      document.getElementById("action_console").innerHTML =("</br>You took a 2 hour nap.");
+      document.getElementById("action_console").innerHTML +=("</br>You took a 2 hour nap.");
       person.time+=2;
       if (person.fatigue<=3){
         document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> 0");
@@ -139,35 +143,39 @@ function homesleep() {
       person.laziness++;
     }
     else if (person.time<2 || person.time>=20) {
-      document.getElementById("action_console").innerHTML =("</br>You had a great sleep!");
+      document.getElementById("action_console").innerHTML +=("</br>You had a great sleep!");
       document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> 0");
       person.fatigue=0;
       person.time=8;
     }
     else if (person.time<8 && person.time>=2){
       if (person.fatigue<=2){
-        document.getElementById("action_console").innerHTML =("</br>You slept for a bit.");
+        document.getElementById("action_console").innerHTML +=("</br>You slept for a bit.");
         person.fatigue=0;
         document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> 0");
       }
       else {
-        document.getElementById("action_console").innerHTML=("</br>You slept for a bit, but you still feel tired.");
+        document.getElementById("action_console").innerHTML +=("</br>You slept for a bit, but you still feel tired.");
         document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue-2));
         person.fatigue-=2;
       }
       person.time=8;
     }
     else{
-      document.getElementById("action_console").innerHTML=("</br>You couldn't sleep.");
+      document.getElementById("action_console").innerHTML +=("</br>You couldn't sleep.");
     }
     inputStorage(person);
-    calculateTime();
+    refreshTime();
+    document.getElementById("action_console").innerHTML +=("</br>Now it is "+displayTime());
   }
   else{
-    document.getElementById("action_console").innerHTML=("</br>You are not tired");
+    document.getElementById("action_console").innerHTML +=("</br>You are not tired");
   }
+<<<<<<< HEAD
   reloadTime();
   reloadDate();
+=======
+>>>>>>> parent of 3edd9e0... show clock, fixed reloadTime
 }
 
 function fridge() {
@@ -186,16 +194,21 @@ function homestudy() {
 
 function homeworkout() {
   let person=outputStorage();
-  document.getElementById("action_console").innerHTML =("</br>You worked out very hard!");
+  document.getElementById("action_console").innerHTML =("It was "+displayTime()+".");
+  document.getElementById("action_console").innerHTML +=("</br>You worked out very hard!");
   person.fatigue++;
   person.time++;
   person.strength++;
   inputStorage(person);
-  calculateTime();
+  refreshTime();
   document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
   document.getElementById("action_console").innerHTML +=("</br>Strength: "+person.strength+" -> "+(person.strength+1));
+<<<<<<< HEAD
   reloadTime();
   reloadDate();
+=======
+  document.getElementById("action_console").innerHTML +=("</br>Now it is "+displayTime()+".");
+>>>>>>> parent of 3edd9e0... show clock, fixed reloadTime
 }
 
 function checkout() {
