@@ -1,3 +1,9 @@
+function write(str) {
+  document.getElementById("action_console").innerHTML =(str);
+}
+function add(str) {
+  document.getElementById("action_console").innerHTML +=(str);
+}
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -124,50 +130,55 @@ function homesleep() {
   let person=outputStorage();
   if (person.fatigue>0){
     if (person.time<21 && person.time>=8){
-      document.getElementById("action_console").innerHTML =("</br>You took a 2 hour nap.");
+      write("</br>You took a 2 hour nap.");
       person.time+=2;
       if (person.fatigue<=3){
-        document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> 0");
+      add("</br>Fatigue: "+person.fatigue+" -> 0");
         person.fatigue=0;
       }
       else {
-        document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue-3));
+      add("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue-3));
         person.fatigue-=3;
       }
-      document.getElementById("action_console").innerHTML +=("</br>laziness: "+person.laziness+" -> "+(person.laziness+1));
+    add("</br>laziness: "+person.laziness+" -> "+(person.laziness+1));
       person.laziness++;
     }
     else if (person.time<2 || person.time>=21) {
-      document.getElementById("action_console").innerHTML =("</br>You had a great sleep!");
-      document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> 0");
+      write("</br>You had a great sleep!");
+    add("</br>Fatigue: "+person.fatigue+" -> 0");
       person.fatigue=0;
       if (person.time>=21){person.date+=1;}
       person.time=8;
     }
     else if (person.time<8 && person.time>=2){
       if (person.fatigue<=2){
-        document.getElementById("action_console").innerHTML =("</br>You slept for a bit.");
+        write("</br>You slept for a bit.");
         person.fatigue=0;
-        document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> 0");
+      add("</br>Fatigue: "+person.fatigue+" -> 0");
       }
       else {
-        document.getElementById("action_console").innerHTML=("</br>You slept for a bit, but you still feel tired.");
-        document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue-2));
+        write("</br>You slept for a bit, but you still feel tired.");
+      add("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue-2));
         person.fatigue-=2;
       }
       person.time=8;
     }
     else{
-      document.getElementById("action_console").innerHTML=("</br>You couldn't sleep.");
+      write("</br>You couldn't sleep.");
     }
     calculateTime();
     inputStorage(person);
   }
   else{
-    document.getElementById("action_console").innerHTML=("</br>You are not tired");
+    write("</br>You are not tired");
   }
   reloadTime();
   reloadDate();
+}
+
+function showstats() {
+  let person=outputStorage();
+
 }
 
 function fridge() {
@@ -186,14 +197,14 @@ function homestudy() {
 
 function homeworkout() {
   let person=outputStorage();
-  document.getElementById("action_console").innerHTML =("</br>You worked out very hard!");
+  write("</br>You worked out very hard!");
   person.fatigue++;
   person.time++;
   person.strength++;
   inputStorage(person);
   calculateTime();
-  document.getElementById("action_console").innerHTML +=("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
-  document.getElementById("action_console").innerHTML +=("</br>Strength: "+person.strength+" -> "+(person.strength+1));
+  add("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
+  add("</br>Strength: "+person.strength+" -> "+(person.strength+1));
   reloadTime();
   reloadDate();
 }
