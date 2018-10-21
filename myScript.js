@@ -24,6 +24,7 @@ function newroll() {
 }
 
 var user={
+  cash: 1000,
   strength:0,
   intelligence:0,
   luck:0,
@@ -178,7 +179,17 @@ function homesleep() {
 
 function showstats() {
   let person=outputStorage();
-
+  write("Attributes:</br>Cash: "+person.cash+
+  "</br>Strength: "+person.strength+
+  "</br>Intelligence: "+person.intelligence+
+  "</br>Luck: "+person.luck+
+  "</br>Laziness: "+person.laziness+
+  "</br>Happiness:: "+person.happiness+
+  "</br>Hunger: "+person.hunger+
+  "</br>Friends: "+person.friends+
+  "</br>Health: "+person.health+
+  "</br>Fatigue: "+person.fatigue+
+  "</br>Attractiveness: "+person.attractiveness);
 }
 
 function fridge() {
