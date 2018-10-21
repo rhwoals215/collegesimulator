@@ -79,11 +79,11 @@ function refreshTime() {
   inputStorage(person);
 }
 
-<<<<<<< HEAD
 function reloadTime() {
   document.getElementById("clock").innerHTML=displayTime();
 }
 
+<<<<<<< HEAD
 function displayDate() {
   let person=outputStorage();
   let day = "";
@@ -121,9 +121,6 @@ function displayDate() {
 function reloadDate() {
   document.getElementById("date").innerHTML=displayDate();
 }
-
-=======
->>>>>>> parent of 3edd9e0... show clock, fixed reloadTime
 function homesleep() {
   let person=outputStorage();
   document.getElementById("action_console").innerHTML =("It was "+displayTime());
@@ -173,9 +170,12 @@ function homesleep() {
   }
 <<<<<<< HEAD
   reloadTime();
+<<<<<<< HEAD
   reloadDate();
 =======
 >>>>>>> parent of 3edd9e0... show clock, fixed reloadTime
+=======
+>>>>>>> parent of d8869c4... added date, but still needs a fix
 }
 
 function fridge() {
@@ -205,10 +205,13 @@ function homeworkout() {
   document.getElementById("action_console").innerHTML +=("</br>Strength: "+person.strength+" -> "+(person.strength+1));
 <<<<<<< HEAD
   reloadTime();
+<<<<<<< HEAD
   reloadDate();
 =======
   document.getElementById("action_console").innerHTML +=("</br>Now it is "+displayTime()+".");
 >>>>>>> parent of 3edd9e0... show clock, fixed reloadTime
+=======
+>>>>>>> parent of d8869c4... added date, but still needs a fix
 }
 
 function checkout() {
