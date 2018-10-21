@@ -2,7 +2,7 @@ function write(str) {
   document.getElementById("action_console").innerHTML =(str);
 }
 function add(str) {
-  document.getElementById("action_console").innerHTML +=(str);
+  document.getElementById("action_console").innerHTML +=("</br>"+str);
 }
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -10,7 +10,7 @@ function getRandomInt(max) {
 
 function newroll() {
   let person=outputStorage();
-  let total=30;
+  let total=25;
   person.strength=getRandomInt(10);
   total-=person.strength;
   person.intelligence=getRandomInt(10);
@@ -25,25 +25,26 @@ function newroll() {
 
 var user={
   cash: 1000,
-  strength:0,
-  intelligence:0,
-  luck:0,
+  strength:6,
+  intelligence:6,
+  luck:6,
   laziness:0,
   happiness:100,
   hunger:0,
   loan:0,
-  friends:3,
+  friends:5,
   health:100,
   location:0,
   currentcarttotal:0,
   date:0,
   time:8,
   fatigue:0,
-  attractiveness:0
+  attractiveness:6
 }
 
 function startNew() {
   let person = user;
+  newroll();
   inputStorage(person);
 }
 
@@ -60,6 +61,38 @@ function inputStorage(person){
 
 function outputStorage(){
   return JSON.parse(window.localStorage.getItem('person1'));
+}
+
+function fatiguecheck() {
+  let person=outputStorage();
+  if (person.fatigue>=10 && person.fatigue<20){
+    person.health-=1;
+    add("</br>But you feel tired.")
+    add("Health: "+(person.health+1)+" -> "+person.health);
+  }
+  else if (person.fatigue>=20 && person.fatigue<30){
+    person.health-=2;
+    add("</br>But you feel very tired.")
+    add("Health: "+(person.health+2)+" -> "+person.health);
+  }
+  else if (person.fatigue>=30 && person.fatigue<40){
+    person.health-=3;
+    add("</br>But you feel extremely tired.")
+    add("Health: "+(person.health+3)+" -> "+person.health);
+  }
+  inputStorage(person);
+}
+
+function healthcheck() {
+  let person=outputStorage();
+  if (person.health==0){
+    write("You have died..")
+    death();
+  }
+}
+
+function death() {
+
 }
 
 function displayTime() {
@@ -131,47 +164,47 @@ function homesleep() {
   let person=outputStorage();
   if (person.fatigue>0){
     if (person.time<21 && person.time>=8){
-      write("</br>You took a 2 hour nap.");
+      write("You took a 2 hour nap.");
       person.time+=2;
       if (person.fatigue<=3){
-      add("</br>Fatigue: "+person.fatigue+" -> 0");
+      add("Fatigue: "+person.fatigue+" -> 0");
         person.fatigue=0;
       }
       else {
-      add("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue-3));
+      add("Fatigue: "+person.fatigue+" -> "+(person.fatigue-3));
         person.fatigue-=3;
       }
-    add("</br>laziness: "+person.laziness+" -> "+(person.laziness+1));
+    add("laziness: "+person.laziness+" -> "+(person.laziness+1));
       person.laziness++;
     }
     else if (person.time<2 || person.time>=21) {
-      write("</br>You had a great sleep!");
-    add("</br>Fatigue: "+person.fatigue+" -> 0");
+      write("You had a great sleep!");
+    add("Fatigue: "+person.fatigue+" -> 0");
       person.fatigue=0;
       if (person.time>=21){person.date+=1;}
       person.time=8;
     }
     else if (person.time<8 && person.time>=2){
       if (person.fatigue<=2){
-        write("</br>You slept for a bit.");
+        write("You slept for a bit.");
         person.fatigue=0;
-      add("</br>Fatigue: "+person.fatigue+" -> 0");
+      add("Fatigue: "+person.fatigue+" -> 0");
       }
       else {
-        write("</br>You slept for a bit, but you still feel tired.");
-      add("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue-2));
+        write("You slept for a bit, but you still feel tired.");
+      add("Fatigue: "+person.fatigue+" -> "+(person.fatigue-2));
         person.fatigue-=2;
       }
       person.time=8;
     }
     else{
-      write("</br>You couldn't sleep.");
+      write("You couldn't sleep.");
     }
     calculateTime();
     inputStorage(person);
   }
   else{
-    write("</br>You are not tired");
+    write("You are not tired");
   }
   reloadTime();
   reloadDate();
@@ -179,12 +212,12 @@ function homesleep() {
 
 function showstats() {
   let person=outputStorage();
-  write("Attributes:</br>Cash: "+person.cash+
+  write("Attributes:</br></br>Cash: $"+person.cash+
   "</br>Strength: "+person.strength+
   "</br>Intelligence: "+person.intelligence+
   "</br>Luck: "+person.luck+
   "</br>Laziness: "+person.laziness+
-  "</br>Happiness:: "+person.happiness+
+  "</br>Happiness: "+person.happiness+
   "</br>Hunger: "+person.hunger+
   "</br>Friends: "+person.friends+
   "</br>Health: "+person.health+
@@ -203,19 +236,31 @@ function homeeat() {
 }
 
 function homestudy() {
-
+  let person=outputStorage();
+  write("You studied hard!");
+  inputStorage(person);
+  calculateTime();
+  add("fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
+  add("Strength: "+person.strength+" -> "+(person.strength+1));
+  person.fatigue++;
+  person.time++;
+  person.intelligence++;
+  fatiguecheck();
+  reloadTime();
+  reloadDate();
 }
 
 function homeworkout() {
   let person=outputStorage();
-  write("</br>You worked out very hard!");
+  write("You worked out very hard!");
+  add("Fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
+  add("Strength: "+person.strength+" -> "+(person.strength+1));
   person.fatigue++;
   person.time++;
   person.strength++;
   inputStorage(person);
   calculateTime();
-  add("</br>Fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
-  add("</br>Strength: "+person.strength+" -> "+(person.strength+1));
+  fatiguecheck();
   reloadTime();
   reloadDate();
 }
