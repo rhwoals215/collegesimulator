@@ -286,7 +286,19 @@ function studyingstarwucks() {
 }
 
 function flirtStarwucks() {
-
+  let person=outputStorage();
+  if (person.attractiveness>=40 && person.luck>=10){
+    write("You were very smooth and got the number.");
+    person.attractiveness+=2;
+    add("Attractiveness: "+(person.attractiveness-2)+" -> "+person.attractiveness;
+  }
+  else if (person.attractiveness>=20&&person.attractiveness<40) {
+    write("The barista seemed interested, but declined to give you the number");
+  }
+  else{
+    write("The barista said no.");
+  }
+  inputStorage(person);
 }
 
 function stealwrys() {
