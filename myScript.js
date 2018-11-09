@@ -39,7 +39,8 @@ var user={
   date:0,
   time:8,
   fatigue:0,
-  attractiveness:6
+  attractiveness:6,
+  work: 0
 }
 
 function startNew() {
@@ -160,6 +161,10 @@ function reloadDate() {
   document.getElementById("date").innerHTML=displayDate();
 }
 
+function reloadWork() {
+  document.getElementById("work").innerHTML=workCheck();
+}
+
 function homesleep() {
   let person=outputStorage();
   if (person.fatigue>0){
@@ -269,6 +274,14 @@ function checkout() {
 
 }
 
+function workCheck(){
+  let person=outputStorage();
+  if (person.work==2){
+    return ("Work");
+  }
+  return("Apply for a Job");
+}
+
 function applyStarwucks() {
 
 }
@@ -290,7 +303,7 @@ function flirtStarwucks() {
   if (person.attractiveness>=40 && person.luck>=10){
     write("You were very smooth and got the number.");
     person.attractiveness+=2;
-    add("Attractiveness: "+(person.attractiveness-2)+" -> "+person.attractiveness;
+    add("Attractiveness: "+(person.attractiveness-2)+" -> "+person.attractiveness);
   }
   else if (person.attractiveness>=20&&person.attractiveness<40) {
     write("The barista seemed interested, but declined to give you the number");
