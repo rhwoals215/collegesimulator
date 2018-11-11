@@ -84,6 +84,24 @@ function fatiguecheck() {
   inputStorage(person);
 }
 
+function hungercheck() {
+  let person=outputStorage();
+  if (person.hunger>=10 && person.hunger<20){
+    add("</br>But you feel hungry.")
+  }
+  else if (person.hunger>=20 && person.hunger<30){
+    person.health--;
+    add("</br>But you feel very hungry.")
+    add("Health: "+(person.health+1)+" -> "+person.health);
+  }
+  else if (person.hunger>=30 && person.hunger<40){
+    person.health-=2;
+    add("</br>But you are starving.")
+    add("Health: "+(person.health+2)+" -> "+person.health);
+  }
+  inputStorage(person);
+}
+
 function healthcheck() {
   let person=outputStorage();
   if (person.health==0){
@@ -245,27 +263,33 @@ function homestudy() {
   write("You studied hard!");
   inputStorage(person);
   calculateTime();
-  add("fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
+  add("Fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
   add("Strength: "+person.strength+" -> "+(person.strength+1));
+  add("Hunger: "+person.hunger+" -> "+(person.hunger+1));
   person.fatigue++;
   person.time++;
   person.intelligence++;
+  person.hunger++;
   fatiguecheck();
   reloadTime();
   reloadDate();
+  hungercheck();
 }
 
 function homeworkout() {
   let person=outputStorage();
   write("You worked out very hard!");
-  add("Fatigue: "+person.fatigue+" -> "+(person.fatigue+1));
+  add("Fatigue: "+person.fatigue+" -> "+(person.fatigue+2));
   add("Strength: "+person.strength+" -> "+(person.strength+1));
-  person.fatigue++;
+  add("Hunger: "+person.hunger+" -> "+(person.hunger+2));
+  person.fatigue+=2;
   person.time++;
   person.strength++;
+  person.hunger+=2;
   inputStorage(person);
   calculateTime();
   fatiguecheck();
+  hungercheck();
   reloadTime();
   reloadDate();
 }
@@ -283,7 +307,25 @@ function workCheck(){
 }
 
 function applyStarwucks() {
+  let person=outputStorage();
+  if (person.work==2){
+    write("You worked for 5 hours.")
+    add("Fatigue: "+person.fatigue+" -> "+(person.fatigue+5));
+    add("Hunger: "+person.hunger+" -> "+(person.hunger+2));
+    add("You earned $60.");
+    person.time+=5;
+    person.fatigue+=5;
+    person.cash+=60;
+    person.hunger+=2;
+  }
+  else{
+    if (person.work==0){
 
+    }
+    else{
+      write("You don't work here..");
+    }
+  }
 }
 
 function applyWcdonalds() {
